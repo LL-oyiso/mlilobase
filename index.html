@@ -9,7 +9,8 @@
 </head>
 <body>
    
-        <form action="POST" id ="form-info">
+        <form  id ="form-info">
+            <div class="alert">Form Submitted Successfully</div>
             <label for ="email">Email</label>
             <input type ="text" name ="email" value =" " id ="email">
             <label for ="Message">Message</label>
@@ -35,6 +36,10 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebas
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
+
+
+  import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js";
+  const database = getDatabase();
         //listen for submit event
         // this following line helps us access the elements of the form
         document.getElementById("form-info").addEventListener('submit',formSubmit);
@@ -47,7 +52,29 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebas
             //Get values of each input field from the form
             let email = document.querySelector('#email').value;
             let message = document.querySelector('#message').value;
+            sendMessage(email,message);
+        }
 
+        //Send message to firebase
+        function sendMessage(email,message)
+        {
+            const db = getDatabase();
+            set(ref(db, 'users/'+ Math.floor(Math.random()*200000)),{
+                email: email,
+                message:message
+            })
+            .then(() => {
+          //Show Alert Message(5)
+       document.querySelector('.alert').style.display = 'block';
+        //Hide Alert Message After Seven Seconds(6)
+       setTimeout(function () {
+       document.querySelector('.alert').style.display = 'none';
+       }, 7000);
+       document.getElementById('form-info').reset();
+      }).catch((error) => {
+        alert(error)
+      })
+           
         }
     </script>
 </body>
