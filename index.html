@@ -17,6 +17,38 @@
             <button type ="submit" sendMessage() >Submit</button>
             </form>
       
-    
+    <script type ="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyC2WzkdwQwSLb3dnW2E8cSsniT5LLA87SU",
+    authDomain: "mlilobase.firebaseapp.com",
+    projectId: "mlilobase",
+    storageBucket: "mlilobase.appspot.com",
+    messagingSenderId: "966090760585",
+    appId: "1:966090760585:web:170fd15ab3aa1ec4284158"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+        //listen for submit event
+        // this following line helps us access the elements of the form
+        document.getElementById("form-info").addEventListener('submit',formSubmit);
+        
+
+        //submit form
+        function formSubmit(e)
+        {
+            e.preventDefault();
+            //Get values of each input field from the form
+            let email = document.querySelector('#email').value;
+            let message = document.querySelector('#message').value;
+
+        }
+    </script>
 </body>
 </html>
