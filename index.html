@@ -4,11 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel ="stylesheet" href ="style.css">
-    <script src ="script.js"></script>
+    
     <title>Document</title>
+   <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+ 
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  
+  <!-- Script -->
    
+
+
+
+
+ 
+</nav>
         <form  id ="form-info">
             <div class="alert">Form Submitted Successfully</div>
             <label for ="email">Email</label>
@@ -45,37 +65,56 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebas
         document.getElementById("form-info").addEventListener('submit',formSubmit);
         
 
-        //submit form
-        function formSubmit(e)
-        {
-            e.preventDefault();
-            //Get values of each input field from the form
-            let email = document.querySelector('#email').value;
-            let message = document.querySelector('#message').value;
-            sendMessage(email,message);
-        }
+       //submit form
+ function formSubmit(e)
+ {
+     e.preventDefault();
+     //Get values of each input field from the form
+     let email = document.querySelector('#email').value;
+     let message = document.querySelector('#message').value;
+     sendMessage(email,message);
+ }
 
-        //Send message to firebase
-        function sendMessage(email,message)
-        {
-            const db = getDatabase();
-            set(ref(db, 'users/'+ Math.floor(Math.random()*200000)),{
-                email: email,
-                message:message
-            })
-            .then(() => {
-          //Show Alert Message(5)
-       document.querySelector('.alert').style.display = 'block';
-        //Hide Alert Message After Seven Seconds(6)
-       setTimeout(function () {
-       document.querySelector('.alert').style.display = 'none';
-       }, 7000);
-       document.getElementById('form-info').reset();
-      }).catch((error) => {
-        alert(error)
-      })
-           
+ //Send message to firebase
+ function sendMessage(email,message)
+ {
+     const db = getDatabase();
+     set(ref(db, 'users/'+ Math.floor(Math.random()*200000)),{
+         email: email,
+         message:message
+     })
+     .then(() => {
+   //Show Alert Message(5)
+//  document.querySelector('.alert').style.display = 'block';
+ //Hide Alert Message After Seven Seconds(6)
+ const mailOptions = {
+        from: 'your_email@gmail.com',
+        to: 'destination_email@example.com', // Destination email
+        subject: 'New Form Submission',
+        text: `Email: ${email}\nMessage: ${message}`,
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error);
+          alert('Error sending email');
+        } else {
+          console.log('Email sent: ' + info.response);
+          alert('Email sent successfully');
         }
+      });
+
+document.getElementById('form-info').reset();
+}).catch((error) => {
+ alert(error)
+})
+    
+ }
+      
     </script>
+    <script src ="script.js"></script>
+    <script src="https://unpkg.com/nodemailer@6.9.3/lib/nodemailer.js"></script>
+    
+    <script src ="my-email\app.js"></script>
 </body>
 </html>
