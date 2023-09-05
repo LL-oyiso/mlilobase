@@ -29,14 +29,28 @@
 
  
 </nav>
-        <form  id ="form-info">
+
+<div class="mail">
+  <h2>Input an email and Submit</h2>
+  <form name="form1" action="#"> 
+  <ul>
+  <li><input type='text' name='text1'/></li>
+  <li>&nbsp;</li>
+  <li class="submit"><input type="submit" name="submit" value="Submit" onclick="ValidateEmail(document.form1.text1)"/></li>
+  <li>&nbsp;</li>
+  </ul>
+  </form>
+  </div>
+  <!-- <body onload='document.form1.text1.focus()'></body> -->
+  <script src="script.js"></script>
+        <!-- <form  id ="form-info">
             <div class="alert">Form Submitted Successfully</div>
             <label for ="email">Email</label>
             <input type ="text" name ="email" value =" " id ="email">
             <label for ="Message">Message</label>
             <input type ="text" name ="message" value =" "  id="message">
             <button type ="submit" sendMessage() >Submit</button>
-            </form>
+            </form> -->
       
     <script type ="module">
 
